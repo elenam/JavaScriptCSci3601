@@ -1,5 +1,6 @@
 
 <!DOCTYPE html>
+<!-- Elena Machkasova, UMM. Examples for CSci 3601 Spring 2014 -->
 <html>
 <head>
     <title>Introduction to JavaScript</title>
@@ -98,8 +99,57 @@
         }
 
         // JavaScript functions
+        function averageOfTwo(arg1, arg2) {
+            return (arg1 + arg2)/2;
+        }
 
+        // function call
+        document.write("averageOfTwo(5, 6) = " + averageOfTwo(5, 6) + "<br />");
 
+        // functions are first-class citizens:
+        var add5 = function(arg) {return (arg + 5);};
+
+        document.write("add5(6) = " + add5(6) + "<br />");
+
+        var add5Too = add5;
+
+        document.write("add5Too(6) = " + add5Too(6) + "<br />");
+
+        // functions can be returned from other functions
+        function makeAdder(toAdd) {
+            return function(x) {
+                return (x + toAdd);
+            }
+        }
+
+        var add2 = makeAdder(2);
+
+        document.write("add2(6) = " + add2(6) + "<br />");
+
+        var subtract2 = makeAdder(-2);
+
+        document.write("subtract2(6) = " + subtract2(6) + "<br />");
+
+        // JavaScript closures
+        function makeCounter() {
+            var counter = 0;
+            return function() {
+                counter++;
+                return counter;
+            }
+        }
+
+        var incrCounter1 = makeCounter();
+        incrCounter1();
+        incrCounter1();
+        // increment and print:
+        document.write("We increment the counter the third time and print it: " + incrCounter1() + "<br />");
+
+        var incrCounter2 = makeCounter();
+        incrCounter2();
+        // increment and print:
+        document.write("We increment the second counter and print it: " + incrCounter2() + "<br />");
+        document.write("The first counter works independently: " + incrCounter1() + "<br />");
     </script>
 </p>
 </body>
