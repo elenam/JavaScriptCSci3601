@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Introduction to JavaScript</title>
+</head>
+<body>
+<p>
+    <script language="JavaScript">
+        var x = 2;
+        // output the result here:
+        document.writeln("x = " + x + "<br />");
+
+        // conditionals: if statements, switch
+        if (x < 2) {
+            document.writeln(x + " is less than 2<br />");
+        } else {
+            document.writeln(x + " is not less than 2<br />");
+        }
+
+        switch(x) {
+            case 0:
+                document.writeln("case 0<br />");
+                break;
+            case 1:case 2:
+            document.writeln("case  1 or 2<br />");
+            break;
+            default:
+                document.writeln("Anything else<br />");
+        }
+
+        // booleans
+        var b = true;
+        if (b && !b) {
+            document.writeln("This is impossible!<br />");
+        }
+
+        // data types
+        document.write("The type of " + x + " is " + typeof(x) + "<br />");
+        document.write("The type of " + b + " is " + typeof(b) + "<br />");
+
+        // the type is determined by the value stored in a variable
+        var y = 5.6;
+        document.write("The type of " + y + " is " + typeof(y) + "<br />");
+        y = "hello";
+        document.write("The type of " + y + " is " + typeof(y) + "<br />");
+        y = 'hello';
+        document.write("The type of " + y + " is " + typeof(y) + "<br />");
+
+
+        // undefined variables
+        document.write("The type of z (a variable not declared or initialized)" + " is " + typeof(z) + "<br />");
+
+        // if a variable hasn't been declared, using it is a run-time error:
+        // document.write("z = " + z + "<br />");
+        // now uncomment this and the previous statement:
+        // var z;
+        // Lesson: you can declare variables *after* they have been used, it's still a declaration
+
+        document.write("n = " + n  + "<br />");
+        var n = 1;
+
+        // comparisons (pay attention here!)
+
+        // == checks for value equality
+        document.write("x == 2: " + (x == 2) + "<br />");
+        document.write("x == '2': " + (x == '2') + "<br />");
+
+        // === checks for value and type equality
+        document.write("x === 2: " + (x === 2) + "<br />");
+        document.write("x === '2': " + (x === '2') + "<br />");
+
+        // checking if a variable is undefined:
+        if (typeof(z) === "undefined") {
+            document.write("z is undefined<br />");
+        }
+
+        // javascript arrays
+        var mycolors = new Array();
+        mycolors[0] = "red";
+        mycolors[1] = "blue";
+        mycolors[2] = "green";
+
+        // or you can use java-like notations:
+        var days = ["Monday", "Wednesday", "Friday"];
+
+        // arrays are not typed and not consecutive:
+        mycolors[5] = 555;
+
+        for (var i = 0; i < mycolors.length; ++i){
+            document.write(mycolors[i] + "<br />");
+        }
+
+        // a for-in loop would go only over indices for which values are defined
+        // note differences with Java: c is an index, not an element
+        for (c in mycolors) {
+            document.write("The element at index " + c + " is " + mycolors[c] + "<br />");
+        }
+
+        // JavaScript functions
+
+
+    </script>
+</p>
+</body>
+</html>
