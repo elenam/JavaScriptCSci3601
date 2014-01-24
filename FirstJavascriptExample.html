@@ -24,8 +24,8 @@
                 document.write("case 0<br />");
                 break;
             case 1:case 2:
-            document.write("case  1 or 2<br />");
-            break;
+                document.write("case  1 or 2<br />");
+                break;
             default:
                 document.write("Anything else<br />");
         }
@@ -53,9 +53,9 @@
         document.write("The type of z (a variable not declared or initialized)" + " is " + typeof(z) + "<br />");
 
         // if a variable hasn't been declared, using it is a run-time error:
-        // document.write("z = " + z + "<br />");
+        document.write("z = " + z + "<br />");
         // now uncomment this and the previous statement:
-        // var z;
+        var z = 5;
         // Lesson: you can declare variables *after* they have been used, it's still a declaration
 
         document.write("n = " + n  + "<br />");
@@ -94,7 +94,7 @@
 
         // a for-in loop would go only over indices for which values are defined
         // note differences with Java: c is an index, not an element
-        for (c in mycolors) {
+        for (var c in mycolors) {
             document.write("The element at index " + c + " is " + mycolors[c] + "<br />");
         }
 
@@ -113,12 +113,14 @@
 
         var add5Too = add5;
 
+        add5 = "banana";
+
         document.write("add5Too(6) = " + add5Too(6) + "<br />");
 
         // functions can be returned from other functions
         function makeAdder(toAdd) {
-            return function(x) {
-                return (x + toAdd);
+            return function(xx) {
+                return (xx + toAdd);
             }
         }
 
@@ -150,6 +152,96 @@
         // increment and print:
         document.write("We increment the second counter and print it: " + incrCounter2() + "<br />");
         document.write("The first counter works independently: " + incrCounter1() + "<br />");
+
+        // JavaScript objects have properties (store the object's state) and methods (associated functions).
+        // Given that functions are first-class citizens, there's no fundamental difference between
+        // properties and methods.
+        // JavaScript doesn't have classes. One create objects directly by setting their properties
+        // and methods or by creating a constructor.
+
+        // a long way of creating an object:
+        person1 = new Object();
+        person1.name = "Bob Green";
+        person1.yearOfBirth = 1994;
+        person1.city = "St. Paul";
+
+        // a shorter way of creating an object:
+        person2 = {name: "Mary Smith", yearOfBirth :1995, city: "Grand Forks"};
+
+        // using a constructor. A constructor is just a function:
+        function person(name, yearOfBirth, city) {
+            this.name = name;
+            this.yearOfBirth = yearOfBirth;
+            this.city = city;
+        }
+
+        // you call a constructor with the keyword "new"
+        var person3 = new person("Jane Brown", 1993, "Morris");
+
+        people = [person1, person2, person3];
+
+        for (var i = 0; i < people.length; i++) {
+            // iterating over an object properties
+            document.write("person " + i + ":<br />");
+            for (p in people[i]) {
+                document.write (p + " is " + people[i][p] + "<br />");
+            }
+        }
+
+        // methods in objects
+        function personToo(name, yearOfBirth, city) {
+            this.name = name;
+            this.yearOfBirth = yearOfBirth;
+            this.city = city;
+            this.moveTo = function (newCity) {
+                this.city = newCity;
+            }
+
+        }
+
+        var person4 = new personToo("John Doe", 1992, "Minneapolis");
+
+        for (var p in person4) {
+            document.write(p + " is " + person4[p] + "<br />");
+        }
+
+        person4.moveTo("New Orleans");
+
+        for (var p in person4) {
+            document.write(p + " is " + person4[p] + "<br />");
+        }
+
+        // note that objects do not have private properties
+        person4.city = "Boston";
+
+        for (var p in person4) {
+            document.write(p + " is " + person4[p] + "<br />");
+        }
+
+        // if you want a private field, use var. You will be essentially writing
+        // closures
+        // this is not a constructor, it's a closure:
+        function personPrivate(name, yearOfBirth, city) {
+            var privateName = name;
+            var privateYearOfBirth = yearOfBirth;
+            var privateCity = city;
+            return {
+                getName: function () {return privateName},
+                getAge: function () {return  2014 - privateYearOfBirth},
+                getCity: function () {return privateCity},
+                moveTo: function (newCity) {privateCity = newCity}
+            }
+        }
+
+        // don't need "new"
+        person5 = personPrivate("John Smith", 1990, "Morris");
+        document.write(person5.getName() + " lives in " + person5.getCity()  + "<br />");
+
+        person5.moveTo("Paris");
+        document.write(person5.getName() + " lives in " + person5.getCity()  + "<br />");
+
+
+        // you can add methods and properties to existing objects, try it
     </script>
 </p>
 </body>
